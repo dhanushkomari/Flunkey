@@ -1,0 +1,50 @@
+{% extends 'api/base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="section-title">
+        <h2>Available Tables</h2>
+    </div>  
+        
+        <div class="row">
+            {% for i in t%}
+            
+            <div class="col-sm-2">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <a style="color: blue;" href="{% url 'api:select-table' i.id %}"><b>Table - {{i.table_number}}</b></a>
+                    </div>
+                   
+                </div><br>
+            </div>
+            
+            {% endfor %}
+
+        </div>    
+</div><br><br>
+
+{% if tn %}
+<div class="container">
+    <div class="section-title">
+        <h2>Unavailable Tables</h2>
+    </div>  
+        
+        <div class="row">
+            {% for i in tn %}
+            
+            <div class="col-sm-2">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h6 class=""><b><span style="color: orangered;">Table - {{i.table_number}}</span></b></h6>
+                    </div>
+                   
+                </div><br>
+            </div>
+            
+            {% endfor %}
+
+        </div>    
+</div><br><br>
+{% endif %}
+<br><br><br>
+{% endblock %}
