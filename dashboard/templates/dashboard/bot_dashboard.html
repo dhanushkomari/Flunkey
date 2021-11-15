@@ -1,0 +1,57 @@
+{% extends 'api/base.html' %}
+
+{% load static %} 
+{% block css %}
+<link href="{% static "assets/css/boot.min.css" %}" rel="stylesheet" id="bootstrap-css">
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="container"><br><br>
+            <center>
+                <b>
+                    <h5>{{bot_name}}({{bot.color}})</h5>
+                </b>
+            </center>
+
+            <br>
+            <div class="row">
+                
+            
+                <div class="col-md-4">
+                  <div class="card-counter danger">
+                    <i class="fa fa-ticket"></i>
+                    <span class="count-numbers">{{td}}</span>
+                    <span class="count-name">Orders Delivered Today</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="card-counter primary">
+                    <i class="fa fa-ticket"></i>
+                    <span class="count-numbers">{{fd}}</span>
+                    <span class="count-name">Total Orders Delivered</span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="card-counter info">
+                    <i class="fa fa-ticket"></i>
+                    <span class="count-numbers">{{tw}}</span>
+                    <span class="count-name">Orders Delivered This Week</span>
+                  </div>
+                </div>
+
+            </div>
+
+            <div class="container"> <br><br>
+                bot-location coordinates - {{bot_loc.x}}, {{bot_loc.y}}
+                <br>
+                Angle - {{bot_loc.angle}}
+            </div>
+            
+
+        </div>
+    </div>
+{% endblock %}

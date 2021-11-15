@@ -16,4 +16,6 @@ urlpatterns = [
     path('update-bot/<str:bot_no>', views.updateBot, name = 'update-bot'),
     path('success/', views.DisplayOP, name = 'display-op'),
     path('end-today', views.DeleteTimeInDeliView, name = 'end-today'),
+    path('update-table/<str:table_no>', views.updateTable, name = 'update-table')
+
 ]

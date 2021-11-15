@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Delivery, FinalDelivery, Bot  
+from .models import Delivery, FinalDelivery, Bot, Table
 
 class FinalDeliverySerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,3 +15,8 @@ class BotSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bot
         fields = ('avialable', )
+
+class TableSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Table
+        fields = ('avialable',)

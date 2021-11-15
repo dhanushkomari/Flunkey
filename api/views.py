@@ -6,7 +6,7 @@ from time import time
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import BotSerializer, FinalDeliverySerializer
+from .serializers import BotSerializer, FinalDeliverySerializer, TableSerializer
 
 # Create your views here.
 
@@ -47,7 +47,7 @@ def DisplayOptions(request):
                                         )
 
         print(d.speed_of_the_bot, d.food_type)
-        return HttpResponse('created')
+        return redirect('api:display-op')
 
     form = Deliveryform()
     return render(request, 'api/options.html', {'form':form})
@@ -108,6 +108,14 @@ def updateBot(request, bot_no):
     b = Bot.objects.get(bot_no = bot_no)
     serializer = BotSerializer(instance = b, data = request.POST)
 
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def updateTable(request, table_no):
+    t = Table.objects.get(table_number = table_no)
+    serializer = TableSerializer(instance =t, data = request.POST)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)

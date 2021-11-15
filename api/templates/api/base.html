@@ -30,8 +30,15 @@
 
   <!-- Template Main CSS File -->
   <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
+  <link href="{% static "assets/css/style1.css" %}" rel="stylesheet">
 
+ {% comment %} <link href="{% static "assets/css/bootstrap.min.css" %}" rel="stylesheet" id="bootstrap-css">{% endcomment %}
+{% block css %}{% endblock %}
+  <script src="{% static "assets/js/bootstrap.min.js" %}"></script>
+  <script src="{% static "assets/js/jquery.min.js" %}"></script>
+  <!------ Include the above in your HEAD tag ---------->
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 
 <body>
 
@@ -40,11 +47,13 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <!-- <h1 class="logo"><a href="index.html">Flunkey</a></h1> -->
-      <a href="{% url 'api:bots' %}"><img src="{% static "assets/img/flunkey/logo1.png "%}" alt=""></a>
+      <a href="{% url 'api:bots' %}"><img src="{% static "assets/img/flunkey/logo1.png" %}" alt=""></a>
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto " href="{% url 'api:bots' %}">Home</a></li>
-          {% comment %} <li><a class="nav-link scrollto" href="#">Dashboard</a></li>   {% endcomment %}
+          <li><a class="nav-link scrollto " href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+           <li><a class="nav-link scrollto " href="/admin">Admin</a></li>
+
           {% if qs1%}
           {% comment %} <li class="dropdown"><a href="#"><span>Repair</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
@@ -115,7 +124,8 @@
 
   <!-- Template Main JS File -->
   <script src="{% static "assets/js/main.js" %}"></script>
-
+{% block js %}
+{% endblock %}
 
 </body>
 

@@ -1,0 +1,83 @@
+{% extends 'api/base.html' %}   
+
+
+{% load static %} 
+{% block css %}
+<link href="{% static "assets/css/boot.min.css" %}" rel="stylesheet" id="bootstrap-css">
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="container">
+            <div class="row">
+            <div class="col-md-3">
+              <div class="card-counter primary">
+                <i class="fa fa-ticket"></i>
+                <span class="count-numbers">{{fd}}</span>
+                <span class="count-name">Total Orders Delivered</span>
+              </div>
+            </div>
+        
+            <div class="col-md-3">
+              <div class="card-counter danger">
+                <i class="fa fa-ticket"></i>
+                <span class="count-numbers">{{td}}</span>
+                <span class="count-name">Orders Deliverd Today</span>
+              </div>
+            </div>
+        
+            <div class="col-md-3">
+              <div class="card-counter success">
+                <i class="fa fa-users"></i>
+                <span class="count-numbers">{{ab}}</span>
+                <span class="count-name">Active Bots</span>
+              </div>
+            </div>
+        
+            <div class="col-md-3">
+              <div class="card-counter info">
+                <i class="fa fa-table"></i>
+                <span class="count-numbers">{{at}}</span>
+                <span class="count-name">Available Tables</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+    </div>
+
+    <div class="container" style="background-color: aliceblue; border-radius: 0%;">
+        <br>
+        <center><h5>FLUNKEY DETAILS TRACKING</h5></center><br>
+
+        <div class="container">        
+            <div class="row">
+
+                {% for i in abl %}
+                    
+                            <div class="col-sm-3">
+                            <a href="{% url 'dashboard:bot-dashboard' i.name%}">                          
+                                <div class="card-counter warning">
+                                  <i class="fa fa-user"></i>
+                                    <!-- <div><img src="static{{i.image.url}}" alt="{{i.name}}" style = "width:100%; height: auto;"></div> -->
+                                    <div class = "count-name">{{i.name}}({{i.color}})</div>
+                                </div>
+                            </a>
+                            </div>
+                {% endfor %}
+            </div>
+            <br>
+        </div>  
+           
+    </div>
+   
+
+    
+    
+
+
+
+
+{% endblock%}
