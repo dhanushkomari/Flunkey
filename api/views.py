@@ -6,10 +6,34 @@ from time import time
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import BotSerializer, FinalDeliverySerializer, TableSerializer
+from .serializers import BotSerializer, FinalDeliverySerializer, TableSerializer, BatterySerializer
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
 
 # Create your views here.
 
+def Login(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(username = username, password = password)
+        if user is not None:
+            login(request, user)
+            return redirect('api:bots')
+        else:
+            messages.warning(request, 'Invalid Credentials')
+    else:
+        return render(request, 'api/login.html')
+
+@login_required
+def Logout(request):
+    logout(request)
+    messages.info(request, "logged out successfully")
+    return redirect('api:login')
+
+@login_required
 def DisplayBots(request):
     b = Bot.objects.filter(avialable = True)
     bn = Bot.objects.filter(avialable = False)
@@ -17,7 +41,7 @@ def DisplayBots(request):
     return render(request, 'api/home.html', {'b':b, 'bn':bn})
 
 
-
+@login_required
 def DisplayTables(request):
 
     t = Table.objects.filter(avialable = True)
@@ -27,7 +51,7 @@ def DisplayTables(request):
     return render(request, 'api/display-table.html', {'t':t, 'tn':tn})
 
 
-
+@login_required
 def DisplayOptions(request):
     d = Delivery.objects.latest('pk')
     if request.method == "POST":
@@ -57,7 +81,7 @@ def DisplayOP(request):
     return render(request, 'api/op.html', {'d':d})
 
 
-
+@login_required
 def selectBot(request, id):
     b = Bot.objects.get(id = id)
     d = Delivery.objects.create(
@@ -70,7 +94,7 @@ def selectBot(request, id):
     return redirect('api:table')
 
     
-
+@login_required
 def selectTable(request,id):
     t = Table.objects.get(id = id)
     print(t.table_number)
@@ -79,6 +103,7 @@ def selectTable(request,id):
     d.save()
     return redirect('api:select-options')
 
+@login_required
 def DeleteTimeInDeliView(request):
     obj = FinalDelivery.objects.latest('pk')
     obj.time = 0
@@ -116,6 +141,14 @@ def updateBot(request, bot_no):
 def updateTable(request, table_no):
     t = Table.objects.get(table_number = table_no)
     serializer = TableSerializer(instance =t, data = request.POST)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def updateBattery(request, bot_no):
+    b = Bot.objects.get(bot_no = bot_no)
+    serializer = BatterySerializer(instance = b, data = request.POST)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)

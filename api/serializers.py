@@ -20,3 +20,8 @@ class TableSerializer(serializers.ModelSerializer):
     class Meta:
         model = Table
         fields = ('avialable',)
+
+class BatterySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bot
+        fields = ('battery',)

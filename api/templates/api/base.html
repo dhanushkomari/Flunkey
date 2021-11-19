@@ -52,6 +52,8 @@
         <ul>
           <li><a class="nav-link scrollto " href="{% url 'api:bots' %}">Home</a></li>
           <li><a class="nav-link scrollto " href="{% url 'dashboard:dashboard' %}">Dashboard</a></li>
+          <li><a class="nav-link scrollto " href="{% url 'dashboard:map' %}">Map</a></li>
+
            <li><a class="nav-link scrollto " href="/admin">Admin</a></li>
 
           {% if qs1%}
@@ -69,6 +71,8 @@
           {% endif %}
 
           <li><a class="nav-link scrollto end-button" href="{% url 'api:end-today' %}">End-Today</a></li>
+          <li><a class="nav-link scrollto end-button" href="{% url 'api:logout' %}">Logout</a></li>
+
           
 
 

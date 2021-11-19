@@ -1,12 +1,16 @@
 from django.shortcuts import render
 from api.models import Bot, FinalDelivery, Table
-from dashboard.models import Bot_location
+from dashboard.models import Bot_location, Map
 
-from .serializers import LocationSerializer
+from .serializers import LocationSerializer, MapSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from datetime import date, datetime
+
+from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework.parsers import MultiPartParser, FormParser
 # Create your views here.
 
 def dashbaord(request): 
@@ -73,3 +77,20 @@ def updateLocation(request, bot_name):
         serializer.save()
         print(serializer.data)
     return Response(serializer.data)
+
+
+def mapView(request):
+    m = Map.objects.latest('pk')
+    return render(request, 'dashboard/map_dashboard.html', {'m': m})
+
+class updateMap(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+    def post(self, request, *args, **kwargs):
+        m = Map.objects.latest('pk')
+        
+        file_serializer = MapSerializer(instance = m, data=request.data)
+        if file_serializer.is_valid():
+            file_serializer.save()
+            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

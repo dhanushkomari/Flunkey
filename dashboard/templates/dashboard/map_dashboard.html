@@ -1,0 +1,29 @@
+{% extends 'api/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="section-title">
+        <h2>FLUNKEY'S MAP</h2>
+    </div>
+    <div class="container" id = "cont">
+        <img src="/static{{m.image.url}}" alt="" class="img-fluid">
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">       
+       
+    var auto_refresh = setInterval(
+    function ()
+    {               
+        console.log('loaded');                     
+        $('#cont').load(location.href + " #cont").fadeIn("slow");
+    }, 1000); 
+
+
+</script> 
+{% endblock %}

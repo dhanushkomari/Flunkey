@@ -16,3 +16,17 @@ class Bot_location(models.Model):
     
     def __str__(self):
         return str(self.bot.name)
+
+
+class Map(models.Model):
+    image = models.ImageField(upload_to = 'map_images')
+    created_at = models.DateTimeField(auto_now_add = True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+    class Meta:
+        ordering = ('-id',)
+        verbose_name = 'Map Image'
+        verbose_name_plural = 'Map Images'
+
+        def __str__(self):
+            return str(self.id)
