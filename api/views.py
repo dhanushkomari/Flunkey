@@ -21,9 +21,10 @@ def Login(request):
         user = authenticate(username = username, password = password)
         if user is not None:
             login(request, user)
-            return redirect('api:bots')
+            return redirect('api:bots')            
         else:
             messages.warning(request, 'Invalid Credentials')
+            return redirect('api:login')
     else:
         return render(request, 'api/login.html')
 
@@ -55,9 +56,9 @@ def DisplayTables(request):
 def DisplayOptions(request):
     d = Delivery.objects.latest('pk')
     if request.method == "POST":
-        d.speed_of_the_bot = request.POST['speed_of_the_bot']
-        d.food_type = request.POST['food_type']
-        d.save()
+        # d.speed_of_the_bot = request.POST['speed_of_the_bot']
+        # d.food_type = request.POST['food_type']
+        # d.save()
 
         FD = FinalDelivery.objects.create(
                                           bot_no = d.bot_no,
@@ -65,16 +66,16 @@ def DisplayOptions(request):
                                           table_no = d.table_no,
                                           ip = d.ip,
                                           port = d.port,
-                                          food_type = d.food_type,
-                                          speed_of_the_bot = d.speed_of_the_bot,
+                                        #   food_type = d.food_type,
+                                        #   speed_of_the_bot = d.speed_of_the_bot,
                                           time = time()
                                         )
 
-        print(d.speed_of_the_bot, d.food_type)
+        # print(d.speed_of_the_bot, d.food_type)
         return redirect('api:display-op')
 
-    form = Deliveryform()
-    return render(request, 'api/options.html', {'form':form})
+    
+    return render(request, 'api/options.html', {'d':d})
 
 def DisplayOP(request):
     d = FinalDelivery.objects.latest('pk')
@@ -102,6 +103,8 @@ def selectTable(request,id):
     d.table_no = t.table_number
     d.save()
     return redirect('api:select-options')
+
+    
 
 @login_required
 def DeleteTimeInDeliView(request):

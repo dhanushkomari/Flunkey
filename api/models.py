@@ -82,10 +82,10 @@ class FinalDelivery(models.Model):
     table_no = models.IntegerField()
     ip = models.CharField(max_length = 30)
     port = models.IntegerField()
-    food_type = models.CharField(max_length=30)
-    speed_of_the_bot = models.IntegerField()
+    food_type = models.CharField(max_length=30, null = True, blank = True)
+    speed_of_the_bot = models.IntegerField(null = True, blank = True)
     created_at = models.DateTimeField(auto_now_add = True)
-    food_delivered = models.BooleanField(default = False)
+    food_delivered = models.BooleanField(default = True)
     time = models.DecimalField(max_digits=50, decimal_places=6, default = 0)
 
     class Meta:

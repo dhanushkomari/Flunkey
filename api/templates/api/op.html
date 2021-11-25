@@ -9,18 +9,42 @@
             <div class="card-header">For API details @ <a href="/latest">Click here</a></div>
             <br>
             <div class="card-info text-center" style="color: Blue;">
-                Bot No : <b>{{d.bot_no}}</b> 
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <br> <br>
-                Bot Name: <b>{{d.bot_name}}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <br><br>
-                Table No : <b>{{d.table_no}}</b>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <br><br>
-                ip/port: <b>{{d.ip}}:{{d.port}}</b>&nbsp;&nbsp;&nbsp;
-                <br><br>
-                speed of the bot : <b>{{d.speed_of_the_bot}}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <br><br>
-                food type : <b>{{d.food_type}}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="row">
+                    <div class="col-1">
+                        
+                    </div>
+
+                    <div class="col-8"><br>
+                        <h4 style="text-align: left;">Selected Details</h4> <br>
+                        <table class="table table-bordered table-secondary border-info ">
+                            
+                            <tr>
+                                <td>Delivery Id</td>
+                                <td>{{d.id}}</td>
+                            </tr>
+                            <tr>
+                                
+                                <td>Bot No</td>
+                                <td>{{d.bot_no}}</td>
+                            </tr>
+                            <tr>
+                                <td>Bot Name</td>
+                                <td>{{d.bot_name}}</td>
+                            </tr>
+        
+                            <tr>
+                                <td>Table No</td>
+                                <td>{{d.table_no}}</td>
+                            </tr>
+                            
+        
+                        </table><br>
+
+                    </div>
+                    <div class="col-3">
+
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -33,7 +57,7 @@
 {% block js %}
 	<script>
          setTimeout(function(){
-            window.location.href = 'http://35.154.111.73';
+            window.location.href = '';
          }, 5000);
       </script>
 {% endblock %}

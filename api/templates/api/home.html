@@ -21,10 +21,21 @@
                     <div class="card-info text-center">
                         <span>{{i.color}}</span><br>
                         <span>{{i.ip}}:{{i.port}}</span>
-                        <span><span style="color: blue;">Battery</span>: {{i.battery}}%</span>
+                        
+                        <span>Battery :
+                            {% if i.battery >= 0 and i.battery <= 25 %}
+                               <b><span style = "color: red"> {{i.battery|floatformat:"0"}} %</b>
+                            {% elif i.battery >= 26 and i.battery <= 60 %}
+                               <b><span style = "color: orange"> {{i.battery|floatformat:"0"}} %  </b>
+                            {% elif i.battery >= 61 and i.battery <= 100 %} 
+                               <b><span style = "color: green"> {{i.battery|floatformat:"0"}} %</b>
 
+                            {% endif %}
+                            
+                        </span>
                     
                     </div>
+
                 </div><br>
             </div>
             
